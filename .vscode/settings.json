@@ -1,7 +1,21 @@
 {
+  // Run Prettier on save
+  "editor.formatOnSave": true,
+
+  // Make Prettier the formatter for TS/TSX (and JS if you like)
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+
+  // Don’t let VS Code reorder imports automatically
   "editor.codeActionsOnSave": {
+    "source.organizeImports": "never",
     "source.fixAll": "explicit",
-    "source.organizeImports": "explicit",
-    "source.sortMembers": "explicit"
-  }
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // Disable TS/JS built-in formatting (Prettier will handle it)
+  "typescript.format.enable": false,
+  "javascript.format.enable": false
 }
