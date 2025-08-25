@@ -1,12 +1,12 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
-import { API_URL } from "@app/constants/config";
+import { api } from "@app/utils";
 import { cacheKeys } from "@app/constants/cacheKeys";
 import { MeResponse } from "@app/types/api";
 
 const fetchMe = async (): Promise<MeResponse> => {
-  const { data } = await axios.get(`${API_URL}/me`, { withCredentials: true });
+  const { data } = await api.get("/me");
   return data;
 };
 

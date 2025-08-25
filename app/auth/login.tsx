@@ -4,11 +4,18 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import { Sizes } from "@app/theme";
 import { Box, Button, Page, Text, TextInput } from "@app/components";
+import { useSignInMutation } from "@/utils/hooks/useSignIn";
 
 const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const signedInMutation = useSignInMutation();
+
+  const handleSubmit = async () => {
+    await signedInMutation.mutateAsync({ email, password });
+  };
 
   return (
     <Page flex={1} backgroundColor="#DADADA">
@@ -47,7 +54,11 @@ const Login = () => {
         autoCapitalize="none"
         secureTextEntry={true}
       />
-      <Button onPress={() => {}} marginTop={Sizes[2]} marginBottom={Sizes[2]}>
+      <Button
+        onPress={handleSubmit}
+        marginTop={Sizes[2]}
+        marginBottom={Sizes[2]}
+      >
         Login
       </Button>
       <Box

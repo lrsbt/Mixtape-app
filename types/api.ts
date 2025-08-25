@@ -1,6 +1,6 @@
 export interface ApiResponse {
   ok: boolean;
-  code?: "UNAUTHORIZED";
+  code?: string;
   message?: string;
 }
 
