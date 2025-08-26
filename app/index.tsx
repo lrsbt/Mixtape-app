@@ -19,8 +19,6 @@ export default function Index() {
     await logoutMutation.mutateAsync();
   };
 
-  console.log("me:", data);
-
   return (
     <Page
       flex={1}
@@ -44,7 +42,7 @@ export default function Index() {
       <Button width="100%" onPress={() => router.navigate("/auth/login")}>
         Go to Login
       </Button>
-      {isLoggedIn && (
+      {!isLoggedIn && (
         <Button variant="outline" onPress={handleLogout}>
           Logout
         </Button>

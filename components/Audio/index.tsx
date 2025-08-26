@@ -23,19 +23,23 @@ const useProbeAudio = (uri?: string) => {
       .finally(() => setIsProbing(false));
   }, [uri]);
 
-  return { isProbing, contentLength };
+  return {
+    isProbing,
+    contentLength,
+    isLoaded: !isProbing && contentLength > 0,
+  };
 };
 
 const useMix = () => {
   const { data } = useMe();
   const uri = data?.token && `${API_URL}/myMix?token=${data.token}`;
-  const { contentLength, isProbing } = useProbeAudio(uri); // check there's a file
+  const { isLoaded } = useProbeAudio(uri); // check there's a file
   const player = useAudioPlayer({ uri });
 
   return {
     player,
     token: data?.token,
-    isLoaded: !isProbing && contentLength > 0,
+    isLoaded,
   };
 };
 
