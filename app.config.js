@@ -5,15 +5,43 @@ module.exports = {
     version: "1.0.0",
     scheme: "mixtape",
     orientation: "portrait",
+    icon: "./assets/images/icon.png",
+    userInterfaceStyle: "automatic",
+    newArchEnabled: true,
     experiments: {
       tsconfigPaths: true,
     },
     ios: {
+      bundleIdentifier: "com.larsattacks.mixtape",
+      supportsTablet: true,
       infoPlist: {
         UIBackgroundModes: ["audio"],
       },
     },
+    android: {
+      package: "com.larsattacks.mixtape",
+      adaptiveIcon: {
+        foregroundImage: "./assets/images/adaptive-icon.png",
+        backgroundColor: "#ffffff",
+      },
+      edgeToEdgeEnabled: true,
+    },
+    web: {
+      bundler: "metro",
+      output: "static",
+      favicon: "./assets/images/favicon.png",
+    },
     plugins: [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          image: "./assets/images/splash-icon.png",
+          imageWidth: 200,
+          resizeMode: "contain",
+          backgroundColor: "#ffffff",
+        },
+      ],
       ["expo-audio"],
       [
         "expo-font",

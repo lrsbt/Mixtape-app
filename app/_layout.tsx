@@ -6,6 +6,8 @@ import { queryClient } from "@app/utils";
 import { useSetupAudio } from "@app/utils/hooks";
 
 export default function RootLayout() {
+  useSetupAudio();
+
   const [fontsLoaded, fontError] = useFonts({
     "Outfit-Regular": require("../assets/fonts/Outfit/Outfit-Regular.ttf"),
     "Outfit-Medium": require("../assets/fonts/Outfit/Outfit-Medium.ttf"),
@@ -13,8 +15,6 @@ export default function RootLayout() {
     "Outfit-Bold": require("../assets/fonts/Outfit/Outfit-Bold.ttf"),
     "PT-Mono": require("../assets/fonts/JetBrainsMono/JetBrainsMono-Bold.ttf"),
   });
-
-  useSetupAudio();
 
   if (!fontsLoaded && !fontError) return null;
 
