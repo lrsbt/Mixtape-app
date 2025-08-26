@@ -12,14 +12,14 @@ module.exports = {
       tsconfigPaths: true,
     },
     ios: {
-      bundleIdentifier: "com.larsattacks.mixtape",
+      bundleIdentifier: "com.helloinvent.mixtape",
       supportsTablet: true,
       infoPlist: {
         UIBackgroundModes: ["audio"],
       },
     },
     android: {
-      package: "com.larsattacks.mixtape",
+      package: "com.helloinvent.mixtape",
       adaptiveIcon: {
         foregroundImage: "./assets/images/adaptive-icon.png",
         backgroundColor: "#ffffff",
