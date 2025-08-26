@@ -1,38 +1,71 @@
+import { View } from "react-native";
 import { useEffect, useState } from "react";
-import { Audio as ExpoAudio } from "expo-av";
-import { Button } from "@app/components";
+import { useAudioPlayer } from "expo-audio";
+
+import { useMe } from "@app/utils/hooks";
+import { Button, Text } from "@app/components";
+import { API_URL } from "@app/constants/config";
+
+const useProbeAudio = (uri?: string) => {
+  const [isProbing, setIsProbing] = useState(false);
+  const [contentLength, setContentLength] = useState(0);
+
+  useEffect(() => {
+    if (!uri) {
+      setContentLength(0);
+      return;
+    }
+    setIsProbing(true);
+    fetch(uri, { method: "HEAD" })
+      .then((r) => Number(r.headers.get("content-length") || 0))
+      .then((len) => setContentLength(len))
+      .catch(() => setContentLength(0))
+      .finally(() => setIsProbing(false));
+  }, [uri]);
+
+  return { isProbing, contentLength };
+};
+
+const useMix = () => {
+  const { data } = useMe();
+  const uri = data?.token && `${API_URL}/myMix?token=${data.token}`;
+  const { contentLength, isProbing } = useProbeAudio(uri); // check there's a file
+  const player = useAudioPlayer({ uri });
+
+  return {
+    player,
+    token: data?.token,
+    isLoaded: !isProbing && contentLength > 0,
+  };
+};
 
 const Audio = () => {
-  const [sound, setSound] = useState<ExpoAudio.Sound | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { player, token, isLoaded } = useMix();
 
-  useEffect(() => {
-    const load = async () => {
-      const { sound: soundObj } = await ExpoAudio.Sound.createAsync({
-        uri: "https://mixtapeapi.larsattacks.co.uk/myMix",
-      });
-      setSound(soundObj);
-    };
-    load();
+  console.log("p", player);
 
-    return () => {
-      sound?.unloadAsync();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!sound) return;
-
-    const run = async () => {
-      (await isPlaying) ? sound.playAsync() : await sound.pauseAsync();
-    };
-    run();
-  }, [isPlaying, sound]);
+  if (!token || !isLoaded) {
+    return <Text>Error loading Tape</Text>;
+  }
 
   return (
-    <Button onPress={() => setIsPlaying((p) => !p)}>
-      {isPlaying ? "Pause" : "Play"}
-    </Button>
+    <View>
+      <Button onPress={() => player.play()}>Play</Button>
+      <Button onPress={() => player.pause()}>Pause</Button>
+      <Button
+        onPress={() => {
+          player.seekTo(0); // rewind to start
+          player.play();
+        }}
+      >
+        Restart
+      </Button>
+      <Button
+        onPress={() => player.seekTo(30_000)} // ms
+      >
+        Seet to 30s
+      </Button>
+    </View>
   );
 };
 

@@ -14,6 +14,7 @@ module.exports = {
       },
     },
     plugins: [
+      ["expo-audio"],
       [
         "expo-font",
         {

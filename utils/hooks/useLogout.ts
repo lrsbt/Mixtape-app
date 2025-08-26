@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
 
 import { api, queryClient } from "@app/utils";
-import { ApiResponse } from "@app/types/api";
+import type { ApiResponse } from "@app/types/api";
 
 export const useLogout = () => {
   const router = useRouter();

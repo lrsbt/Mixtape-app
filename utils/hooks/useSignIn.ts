@@ -1,8 +1,8 @@
 import { useRouter } from "expo-router";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { api, queryClient } from "@app/utils";
-import { ApiResponse } from "@app/types/api";
+import type { ApiResponse } from "@app/types/api";
 
 export interface LoginParams {
   email: string;

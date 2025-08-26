@@ -3,7 +3,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
 import { api } from "@app/utils";
 import { cacheKeys } from "@app/constants/cacheKeys";
-import { MeResponse } from "@app/types/api";
+import type { MeResponse } from "@app/types/api";
 
 const fetchMe = async (): Promise<MeResponse> => {
   const { data } = await api.get("/me");
