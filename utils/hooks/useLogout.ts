@@ -13,8 +13,7 @@ export const useLogout = () => {
       return data;
     },
     onMutate: () => {
-      // be optimistic
-      queryClient.setQueryData(["me"], null);
+      queryClient.setQueryData(["me"], null); // be optimistic
     },
     onSuccess: async () => {
       queryClient.removeQueries({ queryKey: ["me"], exact: true });

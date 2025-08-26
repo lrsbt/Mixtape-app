@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { Sizes } from "@app/theme";
-import { Box, Button, Page, Text, TextInput } from "@app/components";
+import { Box, Button, Page, Tape, Text, TextInput } from "@app/components";
 import { useSignInMutation } from "@/utils/hooks/useSignIn";
 
 const Login = () => {

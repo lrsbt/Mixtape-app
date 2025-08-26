@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { useRouter } from "expo-router";
 
 import { useMe } from "@app/utils/hooks/useMe";
-import { Button, Page, Spinner, Text } from "@app/components";
+import { Audio, Button, Page, Spinner, Tape, Text } from "@app/components";
 import { ApiResponse } from "@app/types/api";
 import { useLogout } from "../utils/hooks/useLogout";
 
@@ -26,6 +26,8 @@ export default function Index() {
       flexDirection="column"
       gap={10}
     >
+      <Tape />
+      <Audio />
       {isLoading && <Spinner />}
       {err?.response?.data?.code === "UNAUTHORIZED" && (
         <Text>Not logged in</Text>

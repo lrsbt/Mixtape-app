@@ -8,6 +8,11 @@ module.exports = {
     experiments: {
       tsconfigPaths: true,
     },
+    ios: {
+      infoPlist: {
+        UIBackgroundModes: ["audio"],
+      },
+    },
     plugins: [
       [
         "expo-font",
