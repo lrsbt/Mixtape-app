@@ -3,11 +3,11 @@ import { ViewProps, ViewStyle } from "react-native";
 
 import { pickViewStyleProps } from "@app/utils";
 import { Box, Spinner, Text, Touchable } from "@app/components";
-import { Borders, Colors, Corners, Fonts, Sizes } from "@app/theme";
+import { Borders, Colors, Corners, Sizes } from "@app/theme";
 
 export interface ButtonProps extends ViewStyle, ViewProps {
   onPress: () => void;
-  variant?: "primary" | "outline";
+  variant?: "primary" | "outline" | "ghost";
   size?: "sm" | "md";
   isSelected?: boolean;
   isLoading?: boolean;
@@ -29,16 +29,24 @@ const Button = ({
   let backgroundColor = {
     primary: Colors.primary,
     outline: Colors.white,
+    ghost: "transparent",
   }[variant];
 
   let textColor = {
     primary: Colors.white,
     outline: Colors.primary,
+    ghost: Colors.primary,
+  }[variant];
+
+  let borderColor = {
+    primary: Colors.primary,
+    outline: Colors.primary,
+    ghost: "transparent",
   }[variant];
 
   const fontSize = {
     sm: 14,
-    md: 18,
+    md: 16,
   }[size];
 
   if (isSelected) {
@@ -60,7 +68,7 @@ const Button = ({
       paddingVertical={Sizes[3]}
       borderRadius={Corners.regular}
       backgroundColor={backgroundColor}
-      borderColor={Colors.primary}
+      borderColor={borderColor}
       borderWidth={Borders.regular}
       {...style}
     >

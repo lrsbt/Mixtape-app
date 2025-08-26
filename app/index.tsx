@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { useRouter } from "expo-router";
 
 import { useMe } from "@app/utils/hooks/useMe";
-import { Audio, Button, Page, Spinner, Tape, Text } from "@app/components";
+import { Audio, Box, Button, Page, Spinner, Tape, Text } from "@app/components";
 import { useIsLoggedIn, useLogout } from "@app/utils/hooks";
 
 import type { ApiResponse } from "@app/types/api";
@@ -28,6 +28,8 @@ export default function Index() {
       flexDirection="column"
       gap={10}
     >
+      {isLoggedIn && <Text>Logged in as {data?.user?.email}</Text>}
+      <Box flex={1} />
       {isLoggedIn && (
         <>
           <Tape />
@@ -38,12 +40,15 @@ export default function Index() {
       {err?.response?.data?.code === "UNAUTHORIZED" && (
         <Text>Not logged in</Text>
       )}
-      {isLoggedIn && <Text>Logged in as {data?.user?.email}</Text>}
-      <Button width="100%" onPress={() => router.navigate("/auth/login")}>
-        Go to Login
-      </Button>
+      <Box flex={1} />
+
       {!isLoggedIn && (
-        <Button variant="outline" onPress={handleLogout}>
+        <Button width="100%" onPress={() => router.navigate("/auth/login")}>
+          Go to Login
+        </Button>
+      )}
+      {isLoggedIn && (
+        <Button variant="ghost" onPress={handleLogout}>
           Logout
         </Button>
       )}
