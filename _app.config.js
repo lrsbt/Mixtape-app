@@ -11,11 +11,18 @@ module.exports = {
     experiments: {
       tsconfigPaths: true,
     },
+    owner: "madebydavid",
+    extra: {
+      eas: {
+        projectId: "54803050-52dc-491c-8e43-fe54c5a5d6c8",
+      },
+    },
     ios: {
       bundleIdentifier: "com.helloinvent.mixtape",
       supportsTablet: true,
       infoPlist: {
         UIBackgroundModes: ["audio"],
+        ITSAppUsesNonExemptEncryption: false,
       },
     },
     android: {
