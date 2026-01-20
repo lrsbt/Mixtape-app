@@ -1,4 +1,5 @@
 export * from "./useIsLoggedIn";
+export * from "./useLists";
 export * from "./useLogout";
 export * from "./useMe";
 export * from "./useMyMix";

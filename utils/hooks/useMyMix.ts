@@ -2,10 +2,11 @@ import { useAudioPlayer, useAudioPlayerStatus } from "expo-audio";
 import { API_URL } from "@app/constants/config";
 import { useMe, useProbeAudio } from "@app/utils/hooks";
 
-export const useMyMix = () => {
+export const useMyMix = (listId: number) => {
   const { data } = useMe();
 
-  const uri = data?.token && `${API_URL}/myMix?token=${data.token}`;
+  const uri =
+    data?.token && `${API_URL}/myMix?token=${data.token}&listId=${listId}`;
   const { isLoaded } = useProbeAudio(uri); // check there's a file
   const player = useAudioPlayer({ uri });
 
